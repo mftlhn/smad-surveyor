@@ -1,35 +1,46 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
-
-const DashboardLayout = ({ children }) => {
-    return (
-        <div>
-            <header>
-                <h1>Dashboard</h1>
-                {/* Add your navigation here */}
-            </header>
-            <main>{children}</main>
-        </div>
-    );
-};
+import AuthenticatedLayout from '../AuthenticatedLayout';
 
 const DashboardPage = () => {
     const router = useRouter();
+    const [dataSurvey, setDataSurvey] = useState([]);
 
-    useEffect(() => {
-        const token = Cookies.get('smad-token');
+    const token = Cookies.get('smad-token');
+    const fetchOrders = async () => {
+
+        try {
+            const response = await fetch(`/api/order/${token}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            setDataSurvey(data.data);
+        } catch (err) {
+            console.error('Fetch error:', err);
+        }
+    };
+
+    useEffect( () => {
         if (!token) {
             router.push('/');
         }
-    }, [router]);
+        fetchOrders();
+    }, [router.ok]);
 
     return (
-        <DashboardLayout>
-            <h2>Welcome to the Dashboard</h2>
-            {/* Add your dashboard content here */}
-        </DashboardLayout>
+        <AuthenticatedLayout head="Dashboard">
+
+        </AuthenticatedLayout>
     );
 };
 

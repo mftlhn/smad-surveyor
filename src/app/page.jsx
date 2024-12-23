@@ -24,59 +24,48 @@ export default function Home() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    const response = 
-      await axios.post(`${process.env.NEXT_PUBLIC_API_PROD}/login`, { email, password }).then((res) => {
-        // console.log(res.data.data);
-        Cookies.set('smad-token', res.data.data.token);
-        Cookies.set('smad-name', res.data.data.user.name);
+    try {
+      setIsLoading(true);
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        Cookies.set('smad-token', data.data.token);
+        Cookies.set('smad-name', data.data.user.name);
         setIsLoading(false);
         setErrorResponse(null);
-        // Cookies.remove('token');
-        // Cookies.remove('name');
-        // console.log(Cookies.get());
         router.push('/dashboard');
-      }).catch((err) => {
-        // console.log(err.response.data.message);
-        setErrorResponse(err.response.data.message);
+      } else {
+        setErrorResponse(`Login failed: ${data.message}`);
         setIsLoading(false);
-      });
-    // console.log(response);
-    // try {
-      // Cookies.set('token', response.data.token);
-      // Cookies.set('name', response.data.user.name);
-      // redirect('/dashboard');
-      //   // const response = await fetch('/api/login', {
-      //   //   method: 'POST',
-      //   //   headers: {
-      //   //     'Content-Type': 'application/json',
-      //   //   },
-      //   //   body: JSON.stringify({ email, password }),
-      //   // });
-        
+      }
+    } catch (error) {
+      setErrorResponse(`An error occurred: ${error.message}`);
+      setIsLoading(false);
+    }
 
-      //   // if (response.ok) {
-      //   //   router.push('/dashboard');
-      //   // } else {
-      //   //   setError('Invalid email or password');
-      //   // }
-    // } catch (error) {
-    //   if (error.response) {
-    //     // Server merespons dengan status code di luar 2xx
-    //     console.error('Error Response:', error.response.data.message);
-    //     setErrorResponse(error.response.data.message);
-    //     console.log(error);
-        
-    //     // console.error('Status Code:', error.response.status);
-    //     // console.error('Headers:', error.response.headers);
-    //   } else if (error.request) {
-    //     // Tidak ada respons dari server
-    //     console.error('No Response:', error.request);
-    //   } else {
-    //     // Kesalahan saat membuat permintaan
-    //     console.error('Request Error:', error.message);
-    //   }
-    // }
+    // await axios.post('/api/login', { email, password }).then((res) => {
+    //   // console.log(res.data.data);
+    //   Cookies.set('smad-token', res.data.data.token);
+    //   Cookies.set('smad-name', res.data.data.user.name);
+    //   setIsLoading(false);
+    //   setErrorResponse(null);
+    //   // Cookies.remove('token');
+    //   // Cookies.remove('name');
+    //   // console.log(Cookies.get());
+    //   router.push('/dashboard');
+    // }).catch((err) => {
+    //   // console.log(err.response.data.message);
+    //   setErrorResponse(err.response.data.message);
+    //   setIsLoading(false);
+    // });
   }
 
   return (
