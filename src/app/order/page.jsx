@@ -11,7 +11,7 @@ const OrderPage = () => {
   const [dataSurvey, setDataSurvey] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(dataSurvey);
+  // console.log(dataSurvey);
   
   const token = Cookies.get('smad-token');
   const fetchOrders = async () => {
