@@ -2,45 +2,30 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
-import AuthenticatedLayout from '../AuthenticatedLayout';
+import Header from '@/components/Header';
+import BottomNavBar from '@/components/BottomNavBar';
 
 const DashboardPage = () => {
-    const router = useRouter();
-    const [dataSurvey, setDataSurvey] = useState([]);
-
-    const token = Cookies.get('smad-token');
-    const fetchOrders = async () => {
-
-        try {
-            const response = await fetch(`/api/order/${token}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-    
-            const data = await response.json();
-            setDataSurvey(data.data);
-        } catch (err) {
-            console.error('Fetch error:', err);
-        }
-    };
+    // const router = useRouter();
+    // const token = Cookies.get('smad-token');
+    const token = localStorage.getItem('smad-token');
 
     useEffect( () => {
         if (!token) {
             router.push('/');
         }
-        fetchOrders();
-    }, [router.ok]);
+    }, [token]);
 
     return (
-        <AuthenticatedLayout head="Dashboard">
-
-        </AuthenticatedLayout>
+        <>
+            <Header title={'Dashboard'}/>
+            <div className="w-full h-full mt-[15%]">
+                <div className='w-full h-full bg-red-500'>
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+            <BottomNavBar />
+        </>
     );
 };
 
