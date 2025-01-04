@@ -7,8 +7,8 @@ import UpdateIsOpen from '@/components/UpdateIsOpen';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import loadingDocument from '@/components/loading-document.json';
-import Lottie from 'lottie-react';
 import UpdateImageStoreClosed from '@/components/UpdateImageStoreClosed';
+import Lottie from 'react-lottie-player';
 
 const CardDetailOrder = ({ params }) => {
   const [detail, setDetail] = useState(null);
@@ -53,7 +53,7 @@ const CardDetailOrder = ({ params }) => {
           <Skeleton className="h-4 w-[250px]" />
           <Skeleton className="h-4 w-[200px]" />
         </div> */}
-        <Lottie animationData={loadingDocument} className="h-[150px] w-full" />
+        <Lottie play loop animationData={loadingDocument} className="h-[150px] w-full" />
       </div>
     );
   } else {
