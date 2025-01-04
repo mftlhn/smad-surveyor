@@ -52,13 +52,11 @@ const UpdateIsOpen = ({ orderId }) => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         } else {
-            // alert('Data berhasil disimpan');
-            // router.push(`/order/${orderId}`);
             window.location.reload();
         }
     }
   return (
-    <form onSubmit={handleSubmit(formSubmit)} className='mt-[17%] mx-2'>
+    <form onSubmit={handleSubmit(formSubmit)} className='mt-3 mx-2'>
         <div className='flex flex-col'>
             <div>
               <div>Apakah toko buka?</div>  
@@ -85,7 +83,7 @@ const UpdateIsOpen = ({ orderId }) => {
                     {isLoading ? 'Loading...' : 'Simpan'}
                 </Button>
             </div> */}
-            <Card className="px-2 -ml-2 fixed bottom-5 w-full mt-2">
+            <Card className="px-2 -ml-4 fixed bottom-5 w-full mt-2">
                 <Button type="submit" disabled={isLoading} className="mb-[16%] mt-5 w-full">
                 {isLoading ? 'Loading...' : 'Submit'}
                 </Button>

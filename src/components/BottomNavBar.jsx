@@ -11,17 +11,17 @@ const BottomNavBar = () => {
         <nav className="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 z-40">
             <ul className="flex justify-around">
             <li>
-                <Link href="/dashboard" className={firstSegment === 'dashboard' ? 'text-white' : 'text-gray-500'}>
+                <Link href="/dashboard" className={firstSegment === 'dashboard' ? 'text-white' : 'text-gray-500 hover:text-gray-300'}>
                 Dashboard
                 </Link>
             </li>
             <li>
-                <Link href="/order" className={firstSegment === 'order' ? 'text-white' : 'text-gray-500'}>
+                <Link href="/order" className={firstSegment === 'order' ? 'text-white' : 'text-gray-500 hover:text-gray-300'}>
                 Order
                 </Link>
             </li>
             <li>
-                <Link href="/profile" className={firstSegment === 'profile' ? 'text-white' : 'text-gray-500'}>
+                <Link href="/profile" className={firstSegment === 'profile' ? 'text-white' : 'text-gray-500 hover:text-gray-300'}>
                 Profile
                 </Link>
             </li>

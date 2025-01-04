@@ -43,13 +43,6 @@ const OrderPage = () => {
     }
   };
 
-  // useEffect( () => {
-  //     if (!token) {
-  //         router.push('/');
-  //     }
-  //     fetchOrders();
-  // }, [router.ok]);
-
   useEffect(() => {
       if (typeof window !== "undefined") {
           const data = localStorage.getItem("smad-token");

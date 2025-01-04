@@ -49,5 +49,5 @@ export async function POST(request) {
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
-  }
+}
   

@@ -11,7 +11,7 @@ export default async function DetailOrderPage({ params }) {
   return (
     <>
       <Header title={'Detail Order'}/>
-        <CardDetailOrder params={orderId} />
+      <CardDetailOrder params={orderId} />
       <BottomNavBar />
     </>
   )
