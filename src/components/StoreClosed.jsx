@@ -1,7 +1,7 @@
+"use client"
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Label } from './ui/label';
-import { FaInfoCircle } from "react-icons/fa";
 import { Button } from './ui/button';
 import DetailCustomer from './DetailCustomer';
 import Select from 'react-select';
@@ -58,7 +58,7 @@ const StoreClosed = ({ detail }) => {
 
   return (
     <div className="flex flex-col space-y-3 h-full px-2 mt-[17%] z-0 relative">
-      <form onSubmit={handleSubmit(formSubmit)} className='h-full'>
+      <form onSubmit={handleSubmit(formSubmit)}>
         <div className="flex justify-end">
           <DetailCustomer customer={detail?.customer} />
         </div>
@@ -83,7 +83,6 @@ const StoreClosed = ({ detail }) => {
               options={selectOptions}
               onChange={(option) => setValue('how_long_closed', option?.value)} // Update form value
               isClearable
-              placeholder="Pilih durasi"
               className='z-10 mt-2'
             />
           </div>
@@ -117,7 +116,6 @@ const StoreClosed = ({ detail }) => {
                   <Label>No. Telepon Baru</Label>
                   <Input
                     type="text"
-                    placeholder="Masukkan no. telepon baru"
                     onChange={(e) => setValue('new_phone_number', e.target.value)}
                     className='mt-2' 
                   />
@@ -157,7 +155,6 @@ const StoreClosed = ({ detail }) => {
                   <Label>Nama toko baru</Label>
                   <Input
                     type="text"
-                    placeholder="Masukkan nama toko baru"
                     onChange={(e) => setValue('new_store_name', e.target.value)}
                     className='mt-2' 
                   />
@@ -166,7 +163,6 @@ const StoreClosed = ({ detail }) => {
                   <Label>Alamat toko baru</Label>
                   <Input
                     type="text"
-                    placeholder="Masukkan alamat toko baru"
                     onChange={(e) => setValue('new_store_address', e.target.value)}
                     className='mt-2' 
                   />
@@ -181,7 +177,6 @@ const StoreClosed = ({ detail }) => {
             <Label>Nama kerabat customer</Label>
             <Input
               type="text"
-              placeholder="Masukkan nama kerabat customer"
               onChange={(e) => setValue('relative_name', e.target.value)}
               className='mt-2' 
             />
@@ -190,7 +185,6 @@ const StoreClosed = ({ detail }) => {
             <Label>No. Telepon kerabat customer</Label>
             <Input
               type="text"
-              placeholder="Masukkan nama kerabat customer"
               onChange={(e) => setValue('relative_phone_number', e.target.value)}
               className='mt-2' 
             />
@@ -199,7 +193,6 @@ const StoreClosed = ({ detail }) => {
             <Label>Alamat customer</Label>
             <Input
               type="text"
-              placeholder="Masukkan alamat customer"
               onChange={(e) => setValue('owner_address', e.target.value)}
               className='mt-2' 
             />

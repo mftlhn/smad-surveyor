@@ -2,16 +2,18 @@ import { NextResponse } from "next/server"
 import cookie from 'cookie'
 
 export async function GET(req, { params }) {
-    const { detail_id } = params
+    const detail_id = (await params).detail_id
+    const token = (await params).token
 
     try {    
         // Forward request to the external API
-        const cookies = req.headers.get('cookie')
-        const parsedCookies = cookies ? cookie.parse(cookies) : {}
-        const cookieToken = parsedCookies['smad-token']
+        // const cookies = req.headers.get('cookie')
+        // const parsedCookies = cookies ? cookie.parse(cookies) : {}
+        // const cookieToken = parsedCookies['smad-token']
+        // const cookieToken = localStorage.getItem('smad-token')
 
         // Pastikan cookieToken tersedia
-        if (!cookieToken) {
+        if (!token) {
             return new NextResponse(
             JSON.stringify({ message: 'Unauthorized: Token not found' }),
             { status: 401, headers: { 'Content-Type': 'application/json' } }
@@ -22,7 +24,7 @@ export async function GET(req, { params }) {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${cookieToken}`
+            'Authorization': `Bearer ${token}`
           },
         });
     

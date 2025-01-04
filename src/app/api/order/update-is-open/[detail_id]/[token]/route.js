@@ -3,16 +3,17 @@ import { redirect } from 'next/navigation'
 import { NextResponse } from "next/server"
 
 export async function PUT(request, { params }) {
-    const { detail_id } = params
+    const detail_id = (await params).detail_id
+    const token = (await params).token
 
     try {
         // Forward request to the external API
-        const cookies = request.headers.get('cookie')
-        const parsedCookies = cookies ? cookie.parse(cookies) : {}
-        const cookieToken = parsedCookies['smad-token']
+        // const cookies = request.headers.get('cookie')
+        // const parsedCookies = cookies ? cookie.parse(cookies) : {}
+        // const cookieToken = parsedCookies['smad-token']
 
         // Pastikan cookieToken tersedia
-        if (!cookieToken) {
+        if (!token) {
             return new NextResponse(
             JSON.stringify({ message: 'Unauthorized: Token not found' }),
             { status: 401, headers: { 'Content-Type': 'application/json' } }
@@ -26,7 +27,7 @@ export async function PUT(request, { params }) {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${cookieToken}`
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify(body),
         });

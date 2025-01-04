@@ -6,15 +6,22 @@ import Header from '@/components/Header';
 import BottomNavBar from '@/components/BottomNavBar';
 
 const DashboardPage = () => {
-    // const router = useRouter();
-    // const token = Cookies.get('smad-token');
-    const token = localStorage.getItem('smad-token');
+    const router = useRouter();
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const data = localStorage.getItem("smad-token");
+            setToken(data);
+        }
+    }, []);
 
     useEffect( () => {
+        if(token === null) return; 
         if (!token) {
             router.push('/');
         }
-    }, [token]);
+    }, [token, router]);
 
     return (
         <>

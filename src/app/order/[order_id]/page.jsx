@@ -6,6 +6,7 @@ import BottomNavBar from '@/components/BottomNavBar'
 
 export default async function DetailOrderPage({ params }) {
   const orderId = (await params).order_id
+  // console.log(orderId);
   
   return (
     <>

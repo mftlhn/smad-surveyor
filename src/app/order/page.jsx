@@ -12,12 +12,13 @@ const OrderPage = () => {
   const router = useRouter();
   const [dataSurvey, setDataSurvey] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [token, setToken] = useState(null);
 
   // console.log(dataSurvey);
   // ini jgn begini, seluruh hooks buat aja di components
   
   // const token = Cookies.get('smad-token');
-  const token = localStorage.getItem('smad-token');
+  // const token = localStorage.getItem('smad-token');
   const fetchOrders = async () => {
     try {
       setIsLoading(true);
@@ -26,12 +27,12 @@ const OrderPage = () => {
           headers: {
                 'Content-Type': 'application/json',
             },
-        });
+      });
 
-        if (!response.ok) {
-          setIsLoading(false);
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+      if (!response.ok) {
+        setIsLoading(false);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       const data = await response.json();
       setDataSurvey(data.data);
@@ -42,13 +43,27 @@ const OrderPage = () => {
     }
   };
 
+  // useEffect( () => {
+  //     if (!token) {
+  //         router.push('/');
+  //     }
+  //     fetchOrders();
+  // }, [router.ok]);
+
+  useEffect(() => {
+      if (typeof window !== "undefined") {
+          const data = localStorage.getItem("smad-token");
+          setToken(data);
+      }
+  }, []);
+
   useEffect( () => {
+      if(token === null) return; 
       if (!token) {
-          router.push('/');
+        router.push('/');
       }
       fetchOrders();
-  }, [router.ok]);
-
+  }, [token, router]);
 
   return (
     <>

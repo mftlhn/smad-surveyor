@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
 export async function GET(request, { params }) {
-    const token = params
+    const token = (await params).token
 
     try {    
         // Forward request to the external API
@@ -9,7 +9,7 @@ export async function GET(request, { params }) {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token.token}`
+            'Authorization': `Bearer ${token}`
           },
         });
     
