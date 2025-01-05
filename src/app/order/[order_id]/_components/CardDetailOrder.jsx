@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import loadingDocument from '@/components/loading-document.json';
 import UpdateImageStoreClosed from '@/components/UpdateImageStoreClosed';
-import Lottie from 'react-lottie-player';
 
 const CardDetailOrder = ({ params }) => {
   const [detail, setDetail] = useState(null);
@@ -48,12 +47,12 @@ const CardDetailOrder = ({ params }) => {
   if (isLoading) {
     return (
       <div className='flex flex-col min-h-screen items-center justify-center mt-[17%] mx-2'>
-        {/* <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+        <Skeleton className="h-[125px] w-[250px] rounded-xl" />
         <div className="space-y-2">
           <Skeleton className="h-4 w-[250px]" />
           <Skeleton className="h-4 w-[200px]" />
-        </div> */}
-        <Lottie play loop animationData={loadingDocument} className="h-[150px] w-full" />
+        </div>
+        {/* <Lottie play loop animationData={loadingDocument} className="h-[150px] w-full" /> */}
       </div>
     );
   } else {

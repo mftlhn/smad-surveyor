@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import loadingProfile from '@/components/loading-profile-2.json';
 import { Skeleton } from '@/components/ui/skeleton'
 import LogoutDialog from '@/components/LogoutDialog'
-import Lottie from 'react-lottie-player'
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -62,7 +61,8 @@ const ProfilePage = () => {
             <div className="h-[70px] w-[70px] rounded-full bg-gray-500 flex items-center justify-center">
               {
                 isLoading ? (
-                  <Lottie loop play animationData={loadingProfile} className="" />
+                  // <Lottie loop play animationData={loadingProfile} className="" />
+                  <Skeleton className="h-[50px] w-[50px] rounded-full" />
                 ) : (
                   <p className="text-4xl text-white font-bold">
                     {profile && profile?.name ? profile?.name[0].toUpperCase() : ''}
@@ -84,7 +84,6 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-        {/* <Button className="mx-2">LOGOUT</Button> */}
         <LogoutDialog token={token} />
       </div>
       <BottomNavBar />
