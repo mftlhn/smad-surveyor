@@ -17,7 +17,7 @@ const DashboardPage = () => {
     }, []);
 
     useEffect( () => {
-        if(token === null) return; 
+        if(token === null) return;
         if (!token) {
             router.push('/');
         }

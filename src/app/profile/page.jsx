@@ -20,7 +20,7 @@ const ProfilePage = () => {
   }, []);
   
   useEffect( () => {
-    if(token === null) return; 
+    if(token === null) return;
     if (!token) {
         router.push('/');
     }
