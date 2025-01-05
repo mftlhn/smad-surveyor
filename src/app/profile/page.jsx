@@ -1,11 +1,9 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import Cookies from 'js-cookie'
 import Header from '@/components/Header'
 import BottomNavBar from '@/components/BottomNavBar'
 import { useRouter } from 'next/navigation'
 import loadingProfile from '@/components/loading-profile-2.json';
-import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import LogoutDialog from '@/components/LogoutDialog'
 import Lottie from 'react-lottie-player'
