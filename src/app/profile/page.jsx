@@ -38,16 +38,15 @@ const ProfilePage = () => {
         });
   
         if (!response.ok) {
-          setIsLoading(false);
           throw new Error(`HTTP error! status: ${response.status}`);
         }
   
         const data = await response.json();
         setProfile(data.data);
-        setIsLoading(false);
       } catch (err) {
-        setIsLoading(false);
         console.error('Fetch error:', err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -66,7 +65,7 @@ const ProfilePage = () => {
                   <Lottie loop play animationData={loadingProfile} className="" />
                 ) : (
                   <p className="text-4xl text-white font-bold">
-                    {profile && profile.name ? profile.name[0].toUpperCase() : ''}
+                    {profile && profile?.name ? profile?.name[0].toUpperCase() : ''}
                   </p>
                 )
               }
@@ -77,8 +76,8 @@ const ProfilePage = () => {
                   <Skeleton className="h-4 w-[250px]" />
                 ) : (
                   <div>
-                    <p className='text-lg font-bold text-white'>{profile && profile.name ? profile.name : ''}</p>
-                    <p className='text-sm text-white'>{profile && profile.email ? profile.email : ''}</p>
+                    <p className='text-lg font-bold text-white'>{profile && profile?.name ? profile?.name : ''}</p>
+                    <p className='text-sm text-white'>{profile && profile?.email ? profile?.email : ''}</p>
                   </div>
                 )
               }

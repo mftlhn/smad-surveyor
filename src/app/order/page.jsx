@@ -1,10 +1,8 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import BottomNavBar from '@/components/BottomNavBar';
 
@@ -13,9 +11,6 @@ const OrderPage = () => {
   const [dataSurvey, setDataSurvey] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState(null);
-
-  // console.log(dataSurvey);
-  // ini jgn begini, seluruh hooks buat aja di components
   
   // const token = Cookies.get('smad-token');
   // const token = localStorage.getItem('smad-token');
